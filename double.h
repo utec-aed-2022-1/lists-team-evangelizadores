@@ -40,7 +40,7 @@ class DoubleList : public List<T> {
         }
 
         T pop_front(){
-            if (head ==nullptr && tail== nullptr) exit(0);
+            if (head ==nullptr) {};
             Node<T>* temp = head;
             int valor = temp->data;
             head = head->next;
@@ -50,7 +50,7 @@ class DoubleList : public List<T> {
         }
 
         T pop_back(){
-            if (head ==nullptr && tail== nullptr) exit(0);
+            if (head ==nullptr) exit(0);
             Node<T>* temp = tail;
             int valor = temp->data;
             tail = tail->prev;
@@ -62,7 +62,8 @@ class DoubleList : public List<T> {
         T insert(T data, int pos){
             if (pos==0){
                 push_front(data);
-            } else{
+            }
+            else{
                 Node<T>* nuevo= new Node<T>{data};
                 Node<T>* temp= head;
                 int i=0;
@@ -73,7 +74,6 @@ class DoubleList : public List<T> {
                 temp->next = nuevo;
                 return nuevo->data;
             }
-            return 0;
         }
 
         bool remove(int pos){
@@ -82,11 +82,9 @@ class DoubleList : public List<T> {
 
         T& operator[](int pos){
             Node<T>* iter = head;
-
             for (int i = 0; i < pos; i++){
                 iter = iter->next;
             }
-
             return iter->data;
         }
 
@@ -95,13 +93,13 @@ class DoubleList : public List<T> {
         }
 
         int size(){
-            int tamanio=0;
-            Node<T>* nd = head;
-            while (nd != nullptr){
-                nd = nd->next;
-                tamanio+=1;
+            int sz=0;
+            Node<T>* it = head;
+            while (it != nullptr){
+                it = it->next;
+                sz+=1;
             }
-            return tamanio;
+            return sz;
         }
 
         void clear(){
@@ -127,18 +125,18 @@ class DoubleList : public List<T> {
 
         bool is_sorted(){
             Node<T>* temp = head;
-            bool veri=true;
+            bool var = true;
             if (size()==0){
-                return veri;
+                return var;
             }else{
                 for (int i = 0; i < size(); i++){
                     if (temp->next->data<temp->data){
-                        veri = false;
+                        var = false;
                         break;
                     }
                 }
             }
-            return !veri;
+            return !var;
         }
 
         void reverse(){
